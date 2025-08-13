@@ -9,13 +9,14 @@ const Lang = require('./langloader')
 
 let client
 let activity
+let playerCount = '0'
 
 exports.initRPC = function(genSettings, servSettings, initialDetails = Lang.queryJS('discord.waiting')){
     client = new Client({ transport: 'ipc' })
 
     activity = {
         details: initialDetails,
-        state: Lang.queryJS('discord.state', {shortId: servSettings.shortId}),
+        state: Lang.queryJS('discord.state', {playerCount: playerCount}),
         largeImageKey: servSettings.largeImageKey,
         largeImageText: servSettings.largeImageText,
         smallImageKey: genSettings.smallImageKey,
@@ -41,6 +42,14 @@ exports.initRPC = function(genSettings, servSettings, initialDetails = Lang.quer
 exports.updateDetails = function(details){
     activity.details = details
     client.setActivity(activity)
+}
+
+exports.updatePlayerCount = function(count){
+    playerCount = count
+    activity.state = Lang.queryJS('discord.state', {playerCount: playerCount})
+    if(client) {
+        client.setActivity(activity)
+    }
 }
 
 exports.shutdownRPC = function(){

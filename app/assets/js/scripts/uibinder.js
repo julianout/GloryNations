@@ -58,7 +58,7 @@ function getCurrentView(){
 }
 
 async function showMainUI(data){
-
+    
     if(!isDev){
         loggerAutoUpdater.info('Initializing..')
         ipcRenderer.send('autoUpdateAction', 'initAutoUpdater', ConfigManager.getAllowPrerelease())
@@ -417,6 +417,7 @@ function setSelectedAccount(uuid){
     updateSelectedAccount(authAcc)
     validateSelectedAccount()
 }
+
 
 // Synchronous Listener
 document.addEventListener('readystatechange', async () => {

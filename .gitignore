@@ -4,3 +4,23 @@
 /target/
 /logs/
 /dist/
+
+# Logs
+*.log
+
+# Application data
+.glorynations/
+
+# Temporary files
+nul
+*.tmp
+*.temp
+
+# Distribution files (if generated locally)
+distribution.json
+
+# Claude AI files
+.claude/
+
+# Video files (too large for GitHub)
+app/assets/videos/

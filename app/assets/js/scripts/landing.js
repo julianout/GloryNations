@@ -241,6 +241,7 @@ const refreshServerStatus = async (fade = false) => {
 
     let pLabel = Lang.queryJS('landing.serverStatus.server')
     let pVal = Lang.queryJS('landing.serverStatus.offline')
+    let playerCount = '0'
 
     try {
 
@@ -248,6 +249,12 @@ const refreshServerStatus = async (fade = false) => {
         console.log(servStat)
         pLabel = Lang.queryJS('landing.serverStatus.players')
         pVal = servStat.players.online + '/' + servStat.players.max
+        playerCount = servStat.players.online.toString()
+        
+        // Update Discord RPC with player count
+        if(hasRPC){
+            DiscordWrapper.updatePlayerCount(playerCount)
+        }
 
     } catch (err) {
         loggerLanding.warn('Unable to refresh server status, assuming offline.')
